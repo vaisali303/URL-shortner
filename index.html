@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            animation: slideUp 1.2s ease-in-out;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            margin-top: 10px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background: #ff6a00;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #ff8c42;
+            transform: scale(1.05);
+        }
+        .short-url {
+            margin-top: 15px;
+            font-size: 18px;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 12px;
+            border-radius: 10px;
+            animation: popUp 0.8s ease-in-out;
+        }
+        @keyframes popUp {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        a {
+            color: #fff;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✨ URL Shortener ✨</h1>
+        <form method="POST">
+            <input type="text" name="long_url" placeholder="Enter your URL here..." required>
+            <br>
+            <button type="submit">Shorten URL</button>
+        </form>
+
+        {% if short_url %}
+        <div class="short-url">
+            Shortened URL: <a href="{{ short_url }}" target="_blank">{{ short_url }}</a>
+        </div>
+        {% endif %}
+
+        <p style="margin-top:20px;">
+            <a href="/urls">View All Shortened URLs →</a>
+        </p>
+    </div>
+</body>
+</html>
